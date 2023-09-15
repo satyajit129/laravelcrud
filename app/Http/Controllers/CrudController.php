@@ -37,10 +37,15 @@ class CrudController extends Controller
             'name' => 'required|max:10',
             'email' => 'required|email',
         ]);
-        $crud =Crud::find($id);
+        $crud =Crud::find($id=null);
         $crud->name = $request->name;
         $crud->email = $request->email;
         $crud->save();
         return redirect('/')->with('message',"Data Updated Successfully");
+    }
+    public function deletedata($id=null){
+        $deletedata = Crud::find($id);
+        $deletedata-> delete();
+        return redirect('/')->with('message',"Data Delete Successfully");
     }
 }
